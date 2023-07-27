@@ -26,3 +26,12 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
+  release_zips:
+    name: Create release zip file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a recursive clone source zip
+        uses: espressif/github-actions/release_zips@master
+        env:
+            RELEASE_PROJECT_NAME: iot_experiment
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
