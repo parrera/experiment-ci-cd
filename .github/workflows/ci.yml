@@ -1,9 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
-name: ESP32-IoT-CI-CD
+name: ESP32-IoT-CI
 
 on:
-  # Configura servidor CI/CD para executar o pipeline dos jobs abaixo quando 
+  # Configura servidor CI para executar o pipeline dos jobs abaixo quando 
   # um push ou pull request for realizado tendo como alvo a branch main
   push:
     branches:
@@ -31,4 +31,3 @@ jobs:
       #CPPcheck
     - name: Unit Test
       #CTest
-    - name: Delivery
