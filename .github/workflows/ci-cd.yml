@@ -1,53 +1,74 @@
-# This is a basic workflow to help you get started with Actions
-
-name: ESP32-IoT-CI-CD
-
+name: ESP32-CI-CD
 on:
-  # Configura servidor CI para executar o pipeline dos jobs abaixo quando 
-  # um push ou pull request for realizado tendo como alvo a branch main
+#Configura servidor CI para executar o pipeline dos jobs abaixo quando 
+#um push for realizado tendo como alvo a branch main
   push:
+    tags:
+      - '*'
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
-jobs: # Define os 3 Jobs que serão executados no workflow
-  build: # Responsável por compilar o projeto
-    runs-on: ubuntu-latest # Os comandos serão executados na última versão da distribuição Ubuntu
+jobs: #Define os 3 Jobs que serão executados no workflow
+  build: #Job responsável por compilar o projeto
+    runs-on: ubuntu-latest #Os comandos serão executados na última versão da distribuição Ubuntu
+    permissions:
+      contents: write
+    steps:
+      - name: Repo checkout 
+        uses: actions/checkout@v3 #Action reusável que clona o repo do GH na estação de trabalho
 
-    steps: # Etapas que serão executadas dentro do job build
-    - name: Checkout repo
-      uses: actions/checkout@v3 # Action reusável que clona o repo do GH na estação de trabalho
-      with:
-        submodules: 'recursive' # Garante que os submódulos também serão clonados
-    - name: Espressif IoT Development Framework (ESP-IDF) # Interação com o ESP-IDF
-      uses: espressif/esp-idf-ci-action@v1 # Action fornecida pela Espressif
-      with:
-        esp_idf_version: v4.4 # Versão do ESP-IDF a ser utilizada
-        target: esp32 # especifica a plataforma de compilação
-    - name: Store Artifacts # Armazena os artefatos gerados a compilação
-      uses: actions/upload-artifact@v3
-      with: 
-         name: ESP32-CI-CD # Especifica o nome do artefato criado
-         path: build/ESP32-CI-CD.bin
+      - name: Espressif IoT Development Framework (ESP-IDF) #Interação com o ESP-IDF
+        uses: espressif/esp-idf-ci-action@v1.1.0 #Action fornecida pela Espressif
+        with:
+          esp_idf_version: v4.4 #Versão do ESP-IDF a ser utilizada
+          target: esp32 #Especifica a plataforma de compilação
 
-  test: # Etapa responsável por compilar os testes unitários e gerar os artefatos relacionados
+      - name: Store Artifacts #Armazena os artefatos gerados pela compilação
+        uses: actions/upload-artifact@v3
+        with:
+          name: ESP32-CI-CD #Especifica o nome do artefato criado
+          path: |
+            build/ESP32-CI-CD.bin
+
+  test: #Job responsável por compilar os testes unitários e gerar os artefatos relacionados
     runs-on: ubuntu-latest
-    needs: [build] # Job test só será executado se o Job build for bem-sucedido
+    needs: [build] #Job test só será executado se o Job build for bem-sucedido
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
 
-      - name: Build unit tests
-        uses: espressif/esp-idf-ci-action@v1.1.0
-        with:
-          esp_idf_version: v4.4
-          target: esp32
-          path: test
+      - name: Build tests
+        run: |
+          sudo apt-get install check
+          cd tests
+          make
+          cd tests
+          ls
 
-      - name: Store Artifacts
-        uses: actions/upload-artifact@v3
-        with: 
-          name: unit-test
-          path: test/build/unitExample.bin
+      - name: Show results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            tests/check-example.ctests.xml
+
+  delivery:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [test]
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ESP32-CI-CD
+
+      - name: Create release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          artifacts: "ESP32-CI-CD.bin"
+          tag: 1.0.12
+          bodyFile: "body.md"
