@@ -1,20 +1,18 @@
-name: ESP32-CI-CD
+name: ESP32-CI-CD #Nome do workflow
 on:
-#Configura servidor CI para executar o pipeline dos jobs abaixo quando 
-#um push for realizado tendo como alvo a branch main
   push:
     tags:
-      - '*'
+      - '*' #Executar quando houver um push com tags
     branches:
-      - main
+      - main #Executar quando houver um push na branch main
 
 jobs: #Define os 3 Jobs que serão executados no workflow
   build: #Job responsável por compilar o projeto
     runs-on: ubuntu-latest #Os comandos serão executados na última versão da distribuição Ubuntu
     permissions:
-      contents: write
+      contents: write #Permissão de escrita em conteúdos
     steps:
-      - name: Repo checkout 
+      - name: Repo checkout #Nome da etapa que usará uma actions para clonar o repositório do GH
         uses: actions/checkout@v3 #Action reusável que clona o repo do GH na estação de trabalho
 
       - name: Espressif IoT Development Framework (ESP-IDF) #Interação com o ESP-IDF
@@ -23,8 +21,8 @@ jobs: #Define os 3 Jobs que serão executados no workflow
           esp_idf_version: v4.4 #Versão do ESP-IDF a ser utilizada
           target: esp32 #Especifica a plataforma de compilação
 
-      - name: Store Artifacts #Armazena os artefatos gerados pela compilação
-        uses: actions/upload-artifact@v3
+      - name: Store Artifacts 
+        uses: actions/upload-artifact@v3 #Armazena os artefatos gerados pela compilação
         with:
           name: ESP32-CI-CD #Especifica o nome do artefato criado
           path: |
@@ -39,36 +37,36 @@ jobs: #Define os 3 Jobs que serão executados no workflow
 
       - name: Build tests
         run: |
-          sudo apt-get install check
+          sudo apt-get install check #Instala o utilitário "check"
           cd tests
-          make
+          make #Compila os testes
           cd tests
-          ls
+          ls #Lista o conteúdo do diretório
 
       - name: Show results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2 #Action para publicar resultados de testes
+        if: always() #Sempre executa essa etapa
         with:
           files: |
-            tests/check-example.ctests.xml
+            tests/check-example.ctests.xml #Arquivo de resultados dos testes
 
   delivery:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    needs: [test]
+    needs: [test] #Este job depende do job "test"
     steps:
       - name: Repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 #Clona o repositório do GitHub
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3 #Baixa os artefatos gerados no job "build"
         with:
           name: ESP32-CI-CD
 
       - name: Create release
-        uses: ncipollo/release-action@v1.12.0
+        uses: ncipollo/release-action@v1.12.0 #Action para criar release
         with:
-          artifacts: "ESP32-CI-CD.bin"
-          tag: 1.0.12
-          bodyFile: "body.md"
+          artifacts: "ESP32-CI-CD.bin" #Artefato que será criado na release
+          tag: 1.0.12 #Tag do release
+          bodyFile: "body.md" #Arquivo contendo o corpo do release
