@@ -1,11 +1,11 @@
 name: ESP32-CI-CD #Nome do workflow
 on:
   push:
-    tags:
-      - '*' #Executar quando houver um push com tags
     branches:
       - main #Executar quando houver um push na branch main
-
+ pull_request:
+    branches:
+      - main
 jobs: #Define os 3 Jobs que serão executados no workflow
   build: #Job responsável por compilar o projeto
     runs-on: ubuntu-latest #Os comandos serão executados na última versão da distribuição Ubuntu
