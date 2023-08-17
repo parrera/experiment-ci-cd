@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main #Executar quando houver um push na branch main
- pull_request:
+  pull_request:
     branches:
       - main
 jobs: #Define os 3 Jobs que serão executados no workflow
