@@ -25,8 +25,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         uses: actions/upload-artifact@v3 #Armazena os artefatos gerados pela compilação
         with:
           name: ESP32-CI-CD #Especifica o nome do artefato criado
-          path: |
-            build/ESP32-CI-CD.bin
+          path: build/ESP32-CI-CD.bin
 
   test: #Job responsável por compilar os testes unitários e gerar os artefatos relacionados
     runs-on: ubuntu-latest
@@ -50,8 +49,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always() #Sempre executa essa etapa
         with:
-          files: |
-             test/test.xml #Arquivo com os resultados dos testes
+          files: test/test.xml #Arquivo com os resultados dos testes
 
   delivery:
     runs-on: ubuntu-latest
