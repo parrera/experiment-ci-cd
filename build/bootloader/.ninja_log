@@ -102,3 +102,9 @@
 7469	7799	1692306557863461729	/home/igor/esp/experiment-ci-cd/build/bootloader/.bin_timestamp	ec56f74b86788600
 7799	7902	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
 7799	7902	0	/home/igor/esp/experiment-ci-cd/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+6	62	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+6	62	0	/home/igor/esp/experiment-ci-cd/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+10	66	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+10	66	0	/home/igor/esp/experiment-ci-cd/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+7	60	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
+7	60	0	/home/igor/esp/experiment-ci-cd/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	d6c7a8fe31d3f47d
