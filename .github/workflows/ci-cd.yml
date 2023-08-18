@@ -41,7 +41,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         run: |
           sudo apt-get install libcriterion-dev
           sudo apt-get install meson
-          cd tests
+          cd test
           gcc -o test test.c -lcriterion
           ./test --xml > test.xml
      
