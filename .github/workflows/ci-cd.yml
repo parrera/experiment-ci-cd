@@ -1,4 +1,4 @@
-name: ESP32-CI-CD #Nome do workflow
+name: experiment-ci-cd #Nome do workflow
 on:
   push:
     branches:
@@ -24,8 +24,8 @@ jobs: #Define os 3 Jobs que serão executados no workflow
       - name: Store Artifacts 
         uses: actions/upload-artifact@v3 #Armazena os artefatos gerados pela compilação
         with:
-          name: ESP32-CI-CD #Especifica o nome do artefato criado
-          path: build/ESP32-CI-CD.bin
+          name: experiment-ci-cd #Especifica o nome do artefato criado
+          path: build/experiment-ci-cd.bin
 
   test: #Job responsável por compilar os testes unitários e gerar os artefatos relacionados
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         run: |
           sudo apt-get install libcriterion-dev
           sudo apt-get install meson
-          cd tests
+          cd test
           gcc -o test test.c -lcriterion
           ./test --xml > test.xml
      
@@ -63,11 +63,11 @@ jobs: #Define os 3 Jobs que serão executados no workflow
       - name: Download artifacts
         uses: actions/download-artifact@v3 #Baixa os artefatos gerados no job "build"
         with:
-          name: ESP32-CI-CD
+          name: experiment-ci-cd
 
       - name: Create release
         uses: ncipollo/release-action@v1.12.0 #Action para criar release
         with:
-          artifacts: "ESP32-CI-CD.bin" #Artefato que será criado na release
-          tag: 1.0.13 #Tag do release
+          artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
+          tag: 0.1.2 #Tag do release
           bodyFile: "body.md" #Arquivo contendo o corpo do release

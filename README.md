@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Quasi-experimento: Roteiro sobre configuração e uso de um pipeline CI/CD
 
 Este repositório descreve um roteiro prático para configuração e uso de um **Servidor de Integração e Entrega Contínua**. O objetivo é 
@@ -151,3 +152,11 @@ Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o própri
 
 Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
 
+=======
+Quasi-experiment
+Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
+Para deploy:
+$get_idf
+$idf.py build
+$idf.py -p /dev/ttyUSB0 flash monitor
+>>>>>>> fe19c2aa7c9f185fe0ed055894b11bffeb65923d
