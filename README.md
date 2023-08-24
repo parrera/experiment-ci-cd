@@ -128,7 +128,7 @@ Test(suite_name, test_name){
 
 #### Passo 2
 
-Após modificar o código, você deve criar um novo branch, realizar um `commit` e `push`:
+Após modificar o código, você deve criar um novo branch, realizar um `commit` e um `push`:
 
 ```bash
 git checkout -b bug
@@ -145,7 +145,7 @@ Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o GHA ini
 
 Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
 
-#### Passo 4
+## Tarefa #3: Criando um Pull Request (PR) com a correção
 
 Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 26.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 26.0, como apresentado abaixo.
 
@@ -154,7 +154,7 @@ Test(suite_name, test_name){
     cr_assert(reasonable_values(26.0) == 1);
 }
 ```
-Após modificar o código, você deve criar um novo branch de consertar o bug, realizar um `commit` e um`push`:
+Após modificar o código, você deve criar um novo branch para consertar o bug, realizar um `commit` e um `push`:
 
 ```bash
 git checkout -b fixture
@@ -169,6 +169,10 @@ Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, b
 
 E novamente, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
 
+
+#### Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html>
+
+
 #### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
 
 
@@ -179,5 +183,3 @@ $get_idf
 $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
 ```
-
-#### Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
