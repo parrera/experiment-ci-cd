@@ -172,7 +172,7 @@ E novamente, após finalizar a criação deste novo PR, será iniciada novamente
 #### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
 
 
-####Para deploy no protótipo:
+#### Para deploy no protótipo:
 
 ```bashBa
 $get_idf
@@ -180,4 +180,4 @@ $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
 ```
 
-####Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
+#### Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
