@@ -139,7 +139,7 @@ git push origin bug
 
 #### Passo 3
 
-Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
+Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior esquerdo da janela.
 
 Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o GHA iniciará automaticamente o fluxo de tarefas configurado no arquivo `experiment-ci-cd.yml`. Porém, dessa vez os testes não vão passar, como você poderá ver na tela que aparecerá. Você pode acompanhar o status dessa execução clicando na aba Actions do seu repositório.
 
@@ -147,20 +147,32 @@ Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor
 
 #### Passo 4
 
-Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 25.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 25.0, como apresentado abaixo.
+Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 26.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 26.0, como apresentado abaixo.
 
 ```diff
 Test(suite_name, test_name){
-    cr_assert(reasonable_values(25.0) == 1);
+    cr_assert(reasonable_values(26.0) == 1);
 }
 ```
-Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
+Após modificar o código, você deve criar um novo branch de consertar o bug, realizar um `commit` e um`push`:
 
-Após finalizar a criação do PR, será iniciada novamente a pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Você conseguirá ver o andamento detalhado deste seu pipeline clicando na aba Actions. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
+```bash
+git checkout -b fixture
+git add --all
+git commit -m "Consertando a função Test"
+git push origin fixture
+```
+Insira seu nome de usuário e senha (Token) do GH.
+
+Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...fixture`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" no canto superior direito da tela e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior direito da janela. Você pode acompanhar o andamento do seu pipeline clicando na aba Actions e em seguida, no nome do PR criado que estará em execução.
+
+
+E novamente, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
 
 #### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
 
-*Para deploy no protótipo*:
+
+####Para deploy no protótipo:
 
 ```bashBa
 $get_idf
@@ -168,4 +180,4 @@ $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
 ```
 
-*Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux*: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
+####Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
