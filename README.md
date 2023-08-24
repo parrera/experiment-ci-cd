@@ -112,12 +112,6 @@ git add --all
 git commit -m "Configurando GitHub Actions"
 git push origin main
 ```
-#### Passo 4
-
-Quando o `push` chegar no repositório principal, o GHA iniciará automaticamente o fluxo de tarefas configurado no arquivo `experiment-ci-cd.yml`.
-
-Você pode acompanhar o status dessa execução clicando na aba Actions do seu repositório.
-
 
 ## Tarefa #2: Criando um Pull Request (PR) com bug
 
@@ -147,7 +141,7 @@ git push origin bug
 
 Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
 
-Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o próprio GH vai fazer o build do sistema e rodar seus testes (como na tarefa #1). Porém, dessa vez os testes não vão passar, como você poderá ver na tela que aparecerá.
+Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o GHA iniciará automaticamente o fluxo de tarefas configurado no arquivo `experiment-ci-cd.yml`. Porém, dessa vez os testes não vão passar, como você poderá ver na tela que aparecerá. Você pode acompanhar o status dessa execução clicando na aba Actions do seu repositório.
 
 Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
 
@@ -162,17 +156,17 @@ Test(suite_name, test_name){
 ```
 Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
 
-Após finalizar a criação do PR, será iniciada novamente a pipeline, ou seja, o próprio GH vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Você conseguirá ver o andamento detalhado deste seu pipeline clicando na aba Actions e no nome que deu ao PR criado. Após criada, sua Release está disponível indo na página inicial deste seu projeto no canto direito da sua tela.
-
-Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
-
+Após finalizar a criação do PR, será iniciada novamente a pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Você conseguirá ver o andamento detalhado deste seu pipeline clicando na aba Actions. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
 
 #### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
 
-*Para deploy*:
+*Para deploy no protótipo*:
 
 ```bashBa
 $get_idf
 $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
 ```
+
+*Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux*: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
+

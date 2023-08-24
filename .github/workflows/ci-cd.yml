@@ -1,9 +1,6 @@
 name: experiment-ci-cd #Nome do workflow
 on:
-  push:
-    branches:
-      - main #Executar quando houver um push na branch main
-  pull_request:
+  pull_request: #Executar quando houver um pull request na branch main
     branches:
       - main
 jobs: #Define os 3 Jobs que serão executados no workflow
@@ -51,23 +48,22 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         with:
           files: test/test.xml #Arquivo com os resultados dos testes
 
-  #delivery:
-  #  runs-on: ubuntu-latest
-  #  permissions:
-  #    contents: write
-  #  needs: [test] #Este job depende do job "test"
-  #  steps:
-  #    - name: Repo checkout
-  #      uses: actions/checkout@v3 #Clona o repositório do GitHub
+  delivery:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [test] #Este job depende do job "test"
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3 #Clona o repositório do GitHub
 
-  #    - name: Download artifacts
-  #      uses: actions/download-artifact@v3 #Baixa os artefatos gerados no job "build"
-  #      with:
-  #        name: experiment-ci-cd
-
-      #- name: Create release
-      #  uses: ncipollo/release-action@v1.12.0 #Action para criar release
-      #  with:
-      #    artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
-      #    tag: 0.1.3 #Tag do release
-      #    bodyFile: "body.md" #Arquivo contendo o corpo do release
+      - name: Download artifacts
+        uses: actions/download-artifact@v3 #Baixa os artefatos gerados no job "build"
+        with:
+          name: experiment-ci-cd
+      - name: Create release
+        uses: ncipollo/release-action@v1.12.0 #Action para criar release
+        with:
+          artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
+          tag: 0.1.4 #Tag do release
+          bodyFile: "body.md" #Arquivo contendo o corpo do release
