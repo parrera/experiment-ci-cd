@@ -169,4 +169,3 @@ $idf.py -p /dev/ttyUSB0 flash monitor
 ```
 
 *Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux*: `https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html`
-
