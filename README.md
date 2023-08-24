@@ -147,11 +147,11 @@ Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor
 
 #### Passo 4
 
-Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 25.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 25.0, como apresentado abaixo.
+Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 26.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 26.0, como apresentado abaixo.
 
 ```diff
 Test(suite_name, test_name){
-    cr_assert(reasonable_values(25.0) == 1);
+    cr_assert(reasonable_values(26.0) == 1);
 }
 ```
 Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
