@@ -3,7 +3,7 @@
 Este repositório descreve um roteiro prático para configuração e uso de um **Servidor de Integração e Entrega Contínua**. O objetivo é 
 proporcionar à pessoa estudante um contato real com essas práticas de DevOps.
 
-**Contexto**: Considere que você faz parte de um projeto de sistema embarcado para Internet das Coisas (IoT). Sua equipe é composta por profissionais e praticantes de diferentes áreas como cientistas e engenheiros da computação, engenheiros eletricistas e de controle e automação, mecatrônica, analistas de sistemas entre outros que têm interesse na área de projetos IoT. Todas essas pessoas colaboram em diferentes partes do projeto e elas estão distribuídas geograficamente. O projeto é licenciado através de licenças de software e hardware livre. Você entende que a implementação da prática de pipeline CI/CD neste projeto pode proporcionar: maior disponibilidade aos principais contribuidores do projeto (responsáveis por avaliar os Pull Requests e realizar Merges) para realizarem outros tipos de tarefas, promover maior qualidade ao código-fonte, incentivar a documentação contínua, obtenção de feedback dos usuários mais frequentemente, entre outros benefícios. Então, como vocês estão interessados nessa prática, construíram um roteiro para configuração e uso de um servidor de integração e entrega contínua. Apesar de existirem diversos servidores para implementação dessa prática, vocês escolheram um serviço nativo do GitHub (GH) denominado GitHub Actions (GHA), para implementar esse servidor.
+**Contexto**: Considere que você faz parte de um projeto de sistema embarcado para Internet das Coisas (IoT). Sua equipe é composta por profissionais e praticantes de diferentes áreas como cientistas e engenheiros da computação, engenheiros eletricistas e de controle e automação, mecatrônica, analistas de sistemas entre outros que têm interesse na área de projetos IoT. Todas essas pessoas colaboram em diferentes partes do projeto e elas estão distribuídas geograficamente. O projeto é licenciado através de licenças de software e hardware livre. Você entende que a implementação da prática de pipeline CI/CD neste projeto pode proporcionar: maior disponibilidade aos principais contribuidores do projeto (responsáveis por avaliar os Pull Requests e realizar os Merges) para realizarem outros tipos de tarefas, promover maior qualidade ao código-fonte, incentivar a documentação contínua, obtenção de feedback dos usuários mais frequentemente, entre outros benefícios. Então, como vocês estão interessados nessa prática, construíram um roteiro para configuração e uso de um servidor de integração e entrega contínua. Apesar de existirem diversos servidores para implementação dessa prática, vocês escolheram um serviço nativo do GitHub (GH) denominado GitHub Actions (GHA), para implementar esse servidor.
 
 ## Tarefa #1: Configurar o GitHub Actions
 
@@ -97,11 +97,11 @@ jobs: #Define os 3 Jobs que serão executados no workflow
           bodyFile: "body.md" #Arquivo contendo o corpo do release
 ```
 
-Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `push` ou `pull_request` tendo como alvo a branch principal do repositório, realizar três jobs:
+Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `push` ou `pull_request` tendo como alvo a branch principal do repositório. Ele realiza três jobs:
 
-- fazer a compilação (build)
-- rodar os testes (test)
-- realizar uma entrega (delivery)
+- faz a compilação (build)
+- roda os testes (test)
+- realiza uma entrega (delivery)
 
 #### Passo 3
 
@@ -121,7 +121,7 @@ Você pode acompanhar o status dessa execução clicando na aba Actions do seu r
 
 ## Tarefa #2: Criando um Pull Request (PR) com bug
 
-Vamos introduzir um bug simples no programa exemplo e enviar um PR, para mostrar que ele não será aceito pelo pipeline CI/CD.
+Vamos introduzir um bug simples no teste exemplo e enviar um PR, para mostrar que ele não será aceito pelo pipeline CI/CD.
 
 #### Passo 1
 Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, trocando o valor para 45.0, como apresentado abaixo.
@@ -151,11 +151,27 @@ Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o própri
 
 Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
 
+#### Passo 4
+
+Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 25.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 25.0, como apresentado abaixo.
+
+```diff
+Test(suite_name, test_name){
+    cr_assert(reasonable_values(25.0) == 1);
+}
+```
+Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
+
+Após finalizar a criação do PR, será iniciada novamente a pipeline, ou seja, o próprio GH vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Você conseguirá ver o andamento detalhado deste seu pipeline clicando na aba Actions e no nome que deu ao PR criado. Após criada, sua Release está disponível indo na página inicial deste seu projeto no canto direito da sua tela.
+
+Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
+
+
 #### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
 
 *Para deploy*:
 
-```bash
+```bashBa
 $get_idf
 $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
