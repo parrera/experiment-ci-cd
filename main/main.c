@@ -3,18 +3,15 @@
 #include <freertos/task.h> //Para criar tarefas
 #include <dht.h> //Contém as funções necessárias para trabalhar com o sensor DHT22
 
-#define SENSOR_TYPE DHT_TYPE_AM2302
-Define SENSOR_TYPE como o tipo correto para o DHT22, que é DHT_TYPE_AM2302
-
-//#if defined(CONFIG_EXAMPLE_TYPE_DHT11)
-//#define SENSOR_TYPE DHT_TYPE_DHT11
-//#endif
-//#if defined(CONFIG_EXAMPLE_TYPE_AM2301)
-//#define SENSOR_TYPE DHT_TYPE_AM2301
-//#endif
-//#if defined(CONFIG_EXAMPLE_TYPE_SI7021)
-//#define SENSOR_TYPE DHT_TYPE_SI7021
-//#endif
+#if defined(CONFIG_EXAMPLE_TYPE_DHT11)
+#define SENSOR_TYPE DHT_TYPE_DHT11
+#endif
+#if defined(CONFIG_EXAMPLE_TYPE_AM2301)
+#define SENSOR_TYPE DHT_TYPE_AM2301
+#endif
+#if defined(CONFIG_EXAMPLE_TYPE_SI7021)
+#define SENSOR_TYPE DHT_TYPE_SI7021
+#endif
 
 void dht_test(void *pvParameters)//Executada no contexto da tarefa criada em app_main()
 {
