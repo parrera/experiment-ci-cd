@@ -169,14 +169,15 @@ Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, b
 
 E novamente, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
 
+# FIM
 
-#### Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html>
-
-
-#### Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
+## Passo-a-passo de configuração e instalação do ambiente ESP-IDF em uma distribuição GNU/Linux: <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html>
 
 
-#### Para deploy no protótipo:
+## Esquemático do protótipo: [prototype.pdf](https://github.com/parrera/experiment-ci-cd/files/12381438/prototype.pdf)
+
+
+## Para deploy no protótipo:
 
 ```bashBa
 $get_idf
