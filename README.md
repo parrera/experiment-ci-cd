@@ -26,7 +26,7 @@ name: experiment-ci-cd #Nome do workflow
 on: 
   pull_request:
     branches:
-      - main #Executar quando houver um PR na branch main
+      - main #Executar quando houver um pull_request na branch main
 jobs: #Define os 3 Jobs que serão executados no workflow
   build: #Job responsável por compilar o projeto
     runs-on: ubuntu-latest #Os comandos serão executados na última versão da distribuição Ubuntu
@@ -90,11 +90,11 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         uses: ncipollo/release-action@v1.12.0 #Action para criar release
         with:
           artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
-          tag: 0.1.5 #Tag do release
+          tag: 0.1.0 #Tag do release
           bodyFile: "body.md" #Arquivo contendo o corpo do release
 ```
 
-Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `push` ou `pull_request` tendo como alvo a branch principal do repositório. Ele realiza três jobs:
+Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `pull_request` tendo como alvo a branch principal (main) do repositório. Ele realiza três jobs:
 
 - faz a compilação (build)
 - roda os testes (test)
@@ -136,11 +136,11 @@ git push origin bug
 
 #### Passo 3
 
-Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior esquerdo da janela.
+Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...bug`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request".
 
 Após finalizar a criação do PR, será iniciada a pipeline, ou seja, o GHA iniciará automaticamente o fluxo de tarefas configurado no arquivo `experiment-ci-cd.yml`. Porém, dessa vez os testes não vão passar, como você poderá ver na tela que aparecerá. Você pode acompanhar o status dessa execução clicando na aba Actions do seu repositório.
 
-Em suma, o Servidor CI/CD conseguiu alertar, de forma automática, tanto o autor do PR como o integrador de que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
+Em suma, o Servidor CI/CD conseguiu alertar, de maneira automática, que existe um problema no código submetido, o que impede que ele seja integrado no branch principal do repositório.
 
 ## Tarefa #3: Criando um Pull Request (PR) com a correção
 
@@ -164,7 +164,7 @@ Insira seu nome de usuário e senha (Token) do GH.
 Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...fixture`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" no canto superior direito da tela e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior direito da janela. Você pode acompanhar o andamento do seu pipeline clicando na aba Actions e em seguida, no nome do PR criado que estará em execução.
 
 
-E novamente, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
+E, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
 
 # FIM
 
