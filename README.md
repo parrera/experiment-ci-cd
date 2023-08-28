@@ -1,9 +1,9 @@
-# Quasi-experimento: Roteiro sobre configuração e uso de um pipeline CI/CD
+# Roteiro sobre configuração e uso de um pipeline CI/CD
 
 Este repositório descreve um roteiro prático para configuração e uso de um **Servidor de Integração e Entrega Contínua**. O objetivo é 
-proporcionar à pessoa estudante um contato real com essas práticas de DevOps.
+proporcionar à pessoa estudante um contato real com essas práticas do DevOps no domínio de Sistemas Embarcados IoT.
 
-**Contexto**: Considere que você faz parte de um projeto de sistema embarcado para Internet das Coisas (IoT). Sua equipe é composta por profissionais e praticantes de diferentes áreas como cientistas e engenheiros da computação, engenheiros eletricistas e de controle e automação, mecatrônica, analistas de sistemas entre outros que têm interesse na área de projetos IoT. Todas essas pessoas colaboram em diferentes partes do projeto e elas estão distribuídas geograficamente. O projeto é licenciado através de licenças de software e hardware livre. Você entende que a implementação da prática de pipeline CI/CD neste projeto pode proporcionar: maior disponibilidade aos principais contribuidores do projeto (responsáveis por avaliar os Pull Requests e realizar os Merges) para realizarem outros tipos de tarefas, promover maior qualidade ao código-fonte, incentivar a documentação contínua, obtenção de feedback dos usuários mais frequentemente, entre outros benefícios. Então, como vocês estão interessados nessa prática, construíram um roteiro para configuração e uso de um servidor de integração e entrega contínua. Apesar de existirem diversos servidores para implementação dessa prática, vocês escolheram um serviço nativo do GitHub (GH) denominado GitHub Actions (GHA), para implementar esse servidor.
+**Contexto**: Considere que você faz parte de um Projeto de Sistema Embarcado para Internet das Coisas (IoT). Sua equipe é composta por profissionais e praticantes de diferentes áreas como cientistas e engenheiros da computação, engenheiros eletricistas e de controle e automação, mecatrônica, analistas de sistemas entre outros que têm interesse na área de projetos IoT. Todas essas pessoas colaboram em diferentes partes do projeto e elas estão distribuídas geograficamente. O projeto é licenciado através de licenças de software e hardware livre. Você entende que a implementação das práticas de integração e entrega contínua neste projeto podem proporcionar: maior disponibilidade aos principais contribuidores do projeto (responsáveis por avaliar os Pull Requests e realizar os Merges) para realizarem outros tipos de tarefas, promover maior qualidade ao código-fonte, incentivar a documentação contínua, obtenção de feedback dos usuários mais frequentemente, entre outros benefícios. Então, como vocês estão interessados nessas práticas, construíram um roteiro para configuração e uso de um servidor de integração e entrega contínua. Apesar de existirem diversos servidores para implementação dessa prática, vocês escolheram um serviço nativo do GitHub (GH) denominado GitHub Actions (GHA), para implementar esse servidor.
 
 ## Tarefa #1: Configurar o GitHub Actions
 
@@ -23,13 +23,10 @@ Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.gith
 
 ```yaml
 name: experiment-ci-cd #Nome do workflow
-on:
-  push:
-    branches:
-      - main #Executar quando houver um push na branch main
+on: 
   pull_request:
     branches:
-      - main
+      - main #Executar quando houver um PR na branch main
 jobs: #Define os 3 Jobs que serão executados no workflow
   build: #Job responsável por compilar o projeto
     runs-on: ubuntu-latest #Os comandos serão executados na última versão da distribuição Ubuntu
@@ -93,7 +90,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         uses: ncipollo/release-action@v1.12.0 #Action para criar release
         with:
           artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
-          tag: 0.1.1 #Tag do release
+          tag: 0.1.5 #Tag do release
           bodyFile: "body.md" #Arquivo contendo o corpo do release
 ```
 
