@@ -90,7 +90,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
         uses: ncipollo/release-action@v1.12.0 #Action para criar release
         with:
           artifacts: "experiment-ci-cd.bin" #Artefato que será criado na release
-          tag: 0.1.0 #Tag do release
+          tag: 0.1.5 #Tag do release
           bodyFile: "body.md" #Arquivo contendo o corpo do release
 ```
 
