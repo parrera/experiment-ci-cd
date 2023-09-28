@@ -102,7 +102,7 @@ Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `pull_r
 
 #### Passo 3
 
-Realize um `commit` e um `git push`, isto é:
+Entre no diretório criado ".../experiment-ci-cd/" e realize um `commit` e um `git push`, isto é:
 
 ```bash
 git add --all
@@ -113,6 +113,11 @@ git push origin main
 ## Tarefa #2: Criando um Pull Request (PR) com bug
 
 Vamos introduzir um bug simples no teste exemplo e enviar um PR, para mostrar que ele não será aceito pelo pipeline CI/CD.
+Instale a biblioteca Criterion para execurtarmos o teste:
+
+```bash
+#apt install libcriterion-dev
+```
 
 #### Passo 1
 Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, trocando o valor para 45.0, como apresentado abaixo.
