@@ -102,7 +102,7 @@ Esse arquivo ativa e configura o GHA para toda vez que ocorrer um evento `pull_r
 
 #### Passo 3
 
-Entre no diretório criado ".../experiment-ci-cd/" e realize um `commit` e um `git push`, isto é:
+Entre no diretório criado (use o comando cd no terminal) ".../experiment-ci-cd/", realize um `add`, um `commit` e um `git push`, ou seja:
 
 ```bash
 git add --all
