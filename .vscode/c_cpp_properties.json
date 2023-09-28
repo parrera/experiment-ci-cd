@@ -19,7 +19,8 @@
                     "${workspaceFolder}"
                 ],
                 "limitSymbolsToIncludedHeaders": false
-            }
+            },
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
