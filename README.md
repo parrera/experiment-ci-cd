@@ -19,7 +19,7 @@ Clone o repositório para sua máquina local, usando o seguinte comando (onde `<
 git clone https://github.com/<USER>/experiment-ci-cd.git
 ```
 
-Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`.
+Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `cd ..` `ls`, `ls - la` e `mkdir` no seu terminal ou use a GUI e configure para visualizar arquivos ocultos.
 
 ```yaml
 name: experiment-ci-cd #Nome do workflow
@@ -115,7 +115,7 @@ git push origin main
 Vamos introduzir um bug simples no teste exemplo e enviar um PR, para mostrar que ele não será aceito pelo pipeline CI/CD.
 
 #### Passo 1
-Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, trocando o valor para 45.0, como apresentado abaixo.
+Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test`. Por exemplo, basta alterar a linha 15 no arquivo test.c, trocando o valor para 45.0 e salve o arquivo, como apresentado abaixo.
 
 ```diff
 Test(suite_name, test_name){
@@ -144,14 +144,14 @@ Em suma, o Servidor CI/CD conseguiu alertar, de maneira automática, que existe 
 
 ## Tarefa #3: Criando um Pull Request (PR) com a correção
 
-Retorne com um valor aceitável para o código do teste. Para isso, coloque novamente o valor 26.0 na função `Test` do arquivo [experiment-ci-cd/blob/main/test/test.c](https://github.com/parrera/experiment-ci-cd/blob/main/test/test.c). Por exemplo, basta alterar a linha 12, retornando com o valor para 26.0, como apresentado abaixo.
+Coloque um valor aceitável para o código do teste. Para isso, coloque agora o valor 26.0 na função `Test` do arquivo test.c. Por exemplo, basta alterar a linha 15, colocando o valor para 26.0, como apresentado abaixo.
 
 ```diff
 Test(suite_name, test_name){
     cr_assert(reasonable_values(26.0) == 1);
 }
 ```
-Após modificar o código, você deve criar um novo branch para consertar o bug, realizar um `commit` e um `push`:
+Após modificar o código, salve o arquivo e crie um novo branch para consertar o bug, realizar um `commit` e um `push`:
 
 ```bash
 git checkout -b fixture
@@ -159,7 +159,7 @@ git add --all
 git commit -m "Consertando a função Test"
 git push origin fixture
 ```
-Insira seu nome de usuário e senha (Token) do GH.
+Insira seu nome de usuário e senha (Token) do GH se for requerido
 
 Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...fixture`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" no canto superior direito da tela e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior direito da janela. Você pode acompanhar o andamento do seu pipeline clicando na aba Actions e em seguida, no nome do PR criado que estará em execução.
 
