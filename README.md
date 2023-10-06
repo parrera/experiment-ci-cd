@@ -9,7 +9,7 @@ proporcionar à pessoa estudante um contato real com essas práticas do DevOps n
 
 #### Passo 1
 
-Crie um Token pessoal no GitHub (i) e;  faça um Fork (ii) deste projeto. (i) Para criar um Token, clique no ícone do seu perfil, vá em **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token**. Copie e guarde esse código para usar quando o GitHub lhe pedir para usar uma senha. (ii) Clique no botão **Fork** no canto superior direito na página do projeto no GitHub. Ou seja, você vai configurar um servidor CI/CD na sua própria cópia do repositório.
+Crie um Token pessoal no GitHub (i) e;  faça um Fork (ii) deste projeto. (i) Para criar um Token, clique no ícone do seu perfil, vá em **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token**. Marque as opções "repo" e "workflows" para gerar o Token. Copie e guarde esse código (token) para usar quando o GitHub lhe pedir para usar uma senha. (ii) Clique no botão **Fork** no canto superior direito na página do projeto no GitHub. Ou seja, você vai configurar um servidor CI/CD na sua própria cópia do repositório.
 
 #### Passo 2
 
@@ -19,7 +19,7 @@ Clone o repositório para sua máquina local, usando o seguinte comando (onde `<
 git clone https://github.com/<USER>/experiment-ci-cd.git
 ```
 
-Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `cd ..` `ls`, `ls - la` e `mkdir` no seu terminal ou use a GUI e configure para visualizar arquivos ocultos.
+Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `ls - la` e `mkdir` no seu terminal ou use a GUI e configure para visualizar arquivos ocultos.
 
 ```yaml
 name: experiment-ci-cd #Nome do workflow
@@ -106,7 +106,7 @@ Entre no diretório criado (use o comando cd no terminal) ".../experiment-ci-cd/
 
 ```bash
 git add --all
-git commit -m "Configurando GitHub Actions"
+git commit -m "Configurando o GitHub Actions"
 git push origin main
 ```
 
@@ -115,7 +115,7 @@ git push origin main
 Vamos introduzir um bug simples no teste exemplo e enviar um PR, para mostrar que ele não será aceito pelo pipeline CI/CD.
 
 #### Passo 1
-Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test`. Por exemplo, basta alterar a linha 15 no arquivo test.c, trocando o valor para 45.0 e salve o arquivo, como apresentado abaixo.
+Vamos considerar que o sensor retornou um valor que não é esperado pelo nosso teste. Para isso, coloque o valor 45.0 na função `Test`. Por exemplo, basta alterar a linha 15 no arquivo ".../test/test.c", trocando o valor para 45.0 e salve o arquivo, como apresentado abaixo.
 
 ```diff
 Test(suite_name, test_name){
