@@ -9,7 +9,7 @@ proporcionar à pessoa estudante um contato real com essas práticas do DevOps n
 
 #### Passo 1
 
-Crie um Token pessoal no GitHub (i) e;  faça um Fork (ii) deste projeto. (i) Para criar um Token, clique no ícone do seu perfil, vá em **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token**. Marque as opções "repo" e "workflows" para gerar o Token. Copie e guarde esse código (token) para usar quando o GitHub lhe pedir para usar uma senha. (ii) Clique no botão **Fork** no canto superior direito na página do projeto no GitHub. Ou seja, você vai configurar um servidor CI/CD na sua própria cópia do repositório.
+Crie um Token pessoal no GitHub (i) e;  faça um Fork (ii) deste projeto. (i) Para criar um Token, clique no ícone do seu perfil, vá em **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token**. Marque as opções `repo` e `workflows` para gerar o Token. Gere o token mínimo (7 dias) apenas para este experimento. Copie e guarde esse código (token) para usar quando o GitHub lhe pedir para usar uma senha (password). (ii) Clique no botão **Fork** no canto superior direito na página do projeto no GitHub. Ou seja, você vai configurar um servidor CI/CD na sua própria cópia do repositório.
 
 #### Passo 2
 
@@ -19,7 +19,7 @@ Clone o repositório para sua máquina local, usando o seguinte comando (onde `<
 git clone https://github.com/<USER>/experiment-ci-cd.git
 ```
 
-Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `ls - la` e `mkdir` no seu terminal ou use a GUI e configure para visualizar arquivos ocultos.
+Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `ls`, `mkdir` e `touch` no seu terminal ou use a GUI para criar os diretórios e arquivo e configure para visualizar arquivos ocultos.
 
 ```yaml
 name: experiment-ci-cd #Nome do workflow
@@ -151,7 +151,7 @@ Test(suite_name, test_name){
     cr_assert(reasonable_values(26.0) == 1);
 }
 ```
-Após modificar o código, salve o arquivo e crie um novo branch para consertar o bug, realizar um `commit` e um `push`:
+Após modificar o código, salve o arquivo e crie um novo branch para consertar o bug, realize um `add`, um `commit` e um `push`:
 
 ```bash
 git checkout -b fixture
@@ -163,8 +163,7 @@ Insira seu nome de usuário e senha (Token) do GH se for requerido
 
 Em seguida, crie novamente um Pull Request (PR) com sua correção. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/experiment-ci-cd/compare/main...fixture`, onde `<USER>` deve ser substituído pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas. Então, clique no botão "Create pull request" no canto superior direito da tela e na janela que se abrirá, você poderá colocar uma pequena descrição sobre o PR, confirme a criação do PR clicando no botão "Create pull request" no canto inferior direito da janela. Você pode acompanhar o andamento do seu pipeline clicando na aba Actions e em seguida, no nome do PR criado que estará em execução.
 
-
-E, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua Release está disponível na página inicial deste seu projeto no canto direito da sua tela.
+E, após finalizar a criação deste novo PR, será iniciada novamente uma pipeline, ou seja, o próprio GHA vai fazer o build do sistema, rodar o teste e realizará a entrega do artefato criando uma Release do seu projeto. Após criada, sua `Release` estará disponível na página inicial deste seu projeto no canto direito da sua tela.
 
 # FIM
 
@@ -176,7 +175,7 @@ E, após finalizar a criação deste novo PR, será iniciada novamente uma pipel
 
 #### Para deploy no protótipo:
 
-```bashBa
+```bash
 $get_idf
 $idf.py build
 $idf.py -p /dev/ttyUSB0 flash monitor
