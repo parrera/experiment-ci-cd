@@ -19,7 +19,7 @@ Clone o repositório para sua máquina local, usando o seguinte comando (onde `<
 git clone https://github.com/<USER>/experiment-ci-cd.git
 ```
 
-Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `ls`, `mkdir` e `touch` no seu terminal ou use a GUI para criar os diretórios e arquivo e configure para visualizar arquivos ocultos.
+Em seguida, no diretório clonado, copie o código a seguir para um arquivo com o seguinte nome e caminho: `.github/workflows/experiment-ci-cd.yml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `experiment-ci-cd.yml`. Para isso, crie os arquivos em um editor de texto ou IDE na sua máquina. Utilize os comandos `mv`, `cd`, `ls`, `mkdir` e `touch` no seu terminal ou use a GUI para criar os diretórios e arquivo e configure para visualizar arquivos ocultos.
 
 ```yaml
 name: experiment-ci-cd #Nome do workflow
