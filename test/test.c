@@ -9,7 +9,6 @@ int reasonable_values(float value){
     }  
 }
 
-// Teste para verificar a função reasonable_values
 Test(suite_name, test_name){
-    cr_assert(reasonable_values(45.0) == 1);
+    cr_assert(reasonable_values(26.0) == 1);
 }
