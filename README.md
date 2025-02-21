@@ -34,7 +34,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
       contents: write #Permissão de escrita em conteúdos
     steps:
       - name: Repo checkout #Nome da etapa que usará uma actions para clonar o repositório do GH
-        uses: actions/checkout@v3 #Action reusável que clona o repo do GH na estação de trabalho
+        uses: actions/checkout@v4 #Action reusável que clona o repo do GH na estação de trabalho
 
       - name: Espressif IoT Development Framework (ESP-IDF) #Interação com o ESP-IDF
         uses: espressif/esp-idf-ci-action@v1.1.0 #Action fornecida pela Espressif
@@ -43,7 +43,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
           target: esp32 #Especifica a plataforma de compilação
 
       - name: Store Artifacts 
-        uses: actions/upload-artifact@v3 #Armazena os artefatos gerados pela compilação
+        uses: actions/upload-artifact@v4 #Armazena os artefatos gerados pela compilação
         with:
           name: experiment-ci-cd #Especifica o nome do artefato criado
           path: build/experiment-ci-cd.bin
@@ -56,7 +56,7 @@ jobs: #Define os 3 Jobs que serão executados no workflow
     needs: [build] #Job test só será executado se o Job build for bem-sucedido
     steps:
       - name: Repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build tests
         run: |
@@ -79,10 +79,10 @@ jobs: #Define os 3 Jobs que serão executados no workflow
     needs: [test] #Este job depende do job "test"
     steps:
       - name: Repo checkout
-        uses: actions/checkout@v3 #Clona o repositório do GitHub
+        uses: actions/checkout@v4 #Clona o repositório do GitHub
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3 #Baixa os artefatos gerados no job "build"
+        uses: actions/download-artifact@v4 #Baixa os artefatos gerados no job "build"
         with:
           name: experiment-ci-cd
 
